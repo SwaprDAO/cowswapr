@@ -1,8 +1,6 @@
 import { createAction } from '@reduxjs/toolkit'
 import { TradeType } from '@uniswap/sdk-core'
 
-import { VoteOption } from '../governance/types'
-
 export interface SerializableTransactionReceipt {
   to: string
   from: string
@@ -44,13 +42,7 @@ export interface VoteTransactionInfo extends BaseTransactionInfo {
   type: TransactionType.VOTE
   governorAddress: string
   proposalId: number
-  decision: VoteOption
   reason: string
-}
-
-export interface DelegateTransactionInfo extends BaseTransactionInfo {
-  type: TransactionType.DELEGATE
-  delegatee: string
 }
 
 export interface ApproveTransactionInfo extends BaseTransactionInfo {
@@ -79,18 +71,6 @@ export interface ExactOutputSwapTransactionInfo extends BaseSwapTransactionInfo 
   maximumInputCurrencyAmountRaw: string
 }
 
-export interface DepositLiquidityStakingTransactionInfo {
-  type: TransactionType.DEPOSIT_LIQUIDITY_STAKING
-  token0Address: string
-  token1Address: string
-}
-
-export interface WithdrawLiquidityStakingTransactionInfo {
-  type: TransactionType.WITHDRAW_LIQUIDITY_STAKING
-  token0Address: string
-  token1Address: string
-}
-
 export interface WrapTransactionInfo {
   type: TransactionType.WRAP
   unwrapped: boolean
@@ -103,51 +83,6 @@ export interface ClaimTransactionInfo {
   uniAmountRaw?: string
 }
 
-export interface CreateV3PoolTransactionInfo {
-  type: TransactionType.CREATE_V3_POOL
-  baseCurrencyId: string
-  quoteCurrencyId: string
-}
-
-export interface AddLiquidityV3PoolTransactionInfo {
-  type: TransactionType.ADD_LIQUIDITY_V3_POOL
-  createPool: boolean
-  baseCurrencyId: string
-  quoteCurrencyId: string
-  feeAmount: number
-  expectedAmountBaseRaw: string
-  expectedAmountQuoteRaw: string
-}
-
-export interface AddLiquidityV2PoolTransactionInfo {
-  type: TransactionType.ADD_LIQUIDITY_V2_POOL
-  baseCurrencyId: string
-  quoteCurrencyId: string
-  expectedAmountBaseRaw: string
-  expectedAmountQuoteRaw: string
-}
-
-export interface MigrateV2LiquidityToV3TransactionInfo {
-  type: TransactionType.MIGRATE_LIQUIDITY_V3
-  baseCurrencyId: string
-  quoteCurrencyId: string
-  isFork: boolean
-}
-
-export interface CollectFeesTransactionInfo {
-  type: TransactionType.COLLECT_FEES
-  currencyId0: string
-  currencyId1: string
-}
-
-export interface RemoveLiquidityV3TransactionInfo {
-  type: TransactionType.REMOVE_LIQUIDITY_V3
-  baseCurrencyId: string
-  quoteCurrencyId: string
-  expectedAmountBaseRaw: string
-  expectedAmountQuoteRaw: string
-}
-
 export interface SubmitProposalTransactionInfo {
   type: TransactionType.SUBMIT_PROPOSAL
 }
@@ -157,17 +92,7 @@ export type TransactionInfo =
   | ExactOutputSwapTransactionInfo
   | ExactInputSwapTransactionInfo
   | ClaimTransactionInfo
-  | VoteTransactionInfo
-  | DelegateTransactionInfo
-  | DepositLiquidityStakingTransactionInfo
-  | WithdrawLiquidityStakingTransactionInfo
   | WrapTransactionInfo
-  | CreateV3PoolTransactionInfo
-  | AddLiquidityV3PoolTransactionInfo
-  | AddLiquidityV2PoolTransactionInfo
-  | MigrateV2LiquidityToV3TransactionInfo
-  | CollectFeesTransactionInfo
-  | RemoveLiquidityV3TransactionInfo
   | SubmitProposalTransactionInfo
 
 export const addTransaction = createAction<{
