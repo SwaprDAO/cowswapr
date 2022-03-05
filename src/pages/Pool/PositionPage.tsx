@@ -459,11 +459,11 @@ export function PositionPage({
               label: [feeValue0.currency.symbol, feeValue1.currency.symbol].join('/'),
             })
 
-            addTransaction(response, {
-              type: TransactionType.COLLECT_FEES,
-              currencyId0: currencyId(feeValue0.currency),
-              currencyId1: currencyId(feeValue1.currency),
-            })
+            // addTransaction(response, {
+            //   type: TransactionType.COLLECT_FEES,
+            //   currencyId0: currencyId(feeValue0.currency),
+            //   currencyId1: currencyId(feeValue1.currency),
+            // })
           })
       })
       .catch((error) => {

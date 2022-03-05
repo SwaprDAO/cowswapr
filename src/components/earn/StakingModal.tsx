@@ -106,12 +106,12 @@ export default function StakingModal({ isOpen, onDismiss, stakingInfo, userLiqui
             { gasLimit: 350000 }
           )
           .then((response: TransactionResponse) => {
-            addTransaction(response, {
-              type: TransactionType.DEPOSIT_LIQUIDITY_STAKING,
-              token0Address: stakingInfo.tokens[0].address,
-              token1Address: stakingInfo.tokens[1].address,
-            })
-            setHash(response.hash)
+            // addTransaction(response, {
+            //   type: TransactionType.DEPOSIT_LIQUIDITY_STAKING,
+            //   token0Address: stakingInfo.tokens[0].address,
+            //   token1Address: stakingInfo.tokens[1].address,
+            // })
+            // setHash(response.hash)
           })
           .catch((error: any) => {
             setAttempting(false)
