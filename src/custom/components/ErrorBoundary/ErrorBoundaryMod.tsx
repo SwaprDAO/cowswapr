@@ -5,7 +5,7 @@ import { ExternalLink, TYPE } from 'theme/index'
 import Page, { Title } from 'components/Page'
 import { AutoColumn } from 'components/Column'
 import styled from 'styled-components/macro'
-import ReactGA from 'react-ga'
+
 import { userAgent } from '@src/utils/userAgent'
 import { AutoRow } from 'components/Row'
 import { MEDIA_WIDTHS } from '@src/theme'
@@ -129,11 +129,7 @@ export default class ErrorBoundary extends Component<unknown, ErrorBoundaryState
   }
 
   componentDidCatch(error: Error, errorInfo: ErrorInfo) {
-    ReactGA.exception({
-      ...error,
-      ...errorInfo,
-      fatal: true,
-    })
+    console.log(error, errorInfo)
   }
 
   render() {

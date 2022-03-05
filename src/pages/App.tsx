@@ -1,7 +1,6 @@
 import ApeModeQueryParamReader from 'hooks/useApeModeQueryParamReader'
 import { Route, Switch } from 'react-router-dom'
 import styled from 'styled-components/macro'
-import GoogleAnalyticsReporter from '../components/analytics/GoogleAnalyticsReporter'
 import AddressClaimModal from '../components/claim/AddressClaimModal'
 import ErrorBoundary from '../components/ErrorBoundary'
 import Header from '../components/Header'
@@ -60,7 +59,6 @@ function TopLevelModals() {
 export default function App() {
   return (
     <ErrorBoundary>
-      <Route component={GoogleAnalyticsReporter} />
       <Route component={DarkModeQueryParamReader} />
       <Route component={ApeModeQueryParamReader} />
       <Web3ReactManager>

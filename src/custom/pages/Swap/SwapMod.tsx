@@ -9,7 +9,6 @@ import { MouseoverTooltip /* , MouseoverTooltipContent */ } from 'components/Too
 // import JSBI from 'jsbi'
 import { useCallback, useContext, useEffect, useMemo, useState } from 'react'
 import { ArrowDown, /*, ArrowLeft */ CheckCircle, HelpCircle /* , Info */ } from 'react-feather'
-import ReactGA from 'react-ga'
 // import { Link, RouteComponentProps } from 'react-router-dom'
 import { Text } from 'rebass'
 import { /* styled, */ ThemeContext } from 'styled-components/macro'
@@ -38,7 +37,6 @@ import TokenWarningModal from 'components/TokenWarningModal'
 import { useAllTokens, useCurrency } from 'hooks/Tokens'
 import { ApprovalState, useApproveCallbackFromTrade } from 'hooks/useApproveCallback'
 // import { V3TradeState } from '../../hooks/useBestV3Trade'
-import useENSAddress from 'hooks/useENSAddress'
 import { useERC20PermitFromTrade, UseERC20PermitState } from 'hooks/useERC20Permit'
 import { useIsSwapUnsupported } from 'hooks/useIsSwapUnsupported'
 import { useSwapCallback } from 'hooks/useSwapCallback'
@@ -241,7 +239,6 @@ export default function Swap({
     isNativeInSwap
   )
   const showWrap: boolean = !isNativeInSwap && wrapType !== WrapType.NOT_APPLICABLE
-  const { address: recipientAddress } = useENSAddress(recipient)
   const trade = showWrap ? undefined : tradeCurrentVersion
   // const defaultTrade = showWrap ? undefined : tradesByVersion[DEFAULT_VERSION]
 
@@ -410,21 +407,6 @@ export default function Swap({
     swapCallback()
       .then((hash) => {
         setSwapState({ attemptingTxn: false, tradeToConfirm, showConfirm, swapErrorMessage: undefined, txHash: hash })
-        ReactGA.event({
-          category: 'Swap',
-          action:
-            recipient === null
-              ? 'Swap w/o Send'
-              : (recipientAddress ?? recipient) === account
-              ? 'Swap w/o Send + recipient'
-              : 'Swap w/ Send',
-          label: [
-            trade?.inputAmount?.currency?.symbol,
-            trade?.outputAmount?.currency?.symbol,
-            // getTradeVersion(trade),
-            'MH',
-          ].join('/'),
-        })
       })
       .catch((error) => {
         console.error('Error swapping tokens', error)
@@ -436,7 +418,7 @@ export default function Swap({
           txHash: undefined,
         })
       })
-  }, [swapCallback, priceImpact, tradeToConfirm, showConfirm, recipient, recipientAddress, account, trade])
+  }, [swapCallback, priceImpact, tradeToConfirm, showConfirm])
 
   // errors
   const [showInverted, setShowInverted] = useState<boolean>(false)

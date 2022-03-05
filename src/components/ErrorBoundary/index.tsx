@@ -1,6 +1,5 @@
 import { Trans } from '@lingui/macro'
 import React, { ErrorInfo } from 'react'
-import ReactGA from 'react-ga'
 import styled from 'styled-components/macro'
 
 import store, { AppState } from '../../state'
@@ -58,11 +57,7 @@ export default class ErrorBoundary extends React.Component<unknown, ErrorBoundar
   }
 
   componentDidCatch(error: Error, errorInfo: ErrorInfo) {
-    ReactGA.exception({
-      ...error,
-      ...errorInfo,
-      fatal: true,
-    })
+    console.log(error, errorInfo)
   }
 
   render() {
@@ -139,13 +134,13 @@ function issueBody(error: Error): string {
   const relevantState = getRelevantState()
   const deviceData = userAgent
   return `## URL
-  
+
 ${window.location.href}
 
 ${
   relevantState
     ? `## \`${relevantState}\` state
-    
+
 \`\`\`json
 ${JSON.stringify(store.getState()[relevantState], null, 2)}
 \`\`\`
