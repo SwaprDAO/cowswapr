@@ -7,7 +7,6 @@ import { StrictMode } from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import { HashRouter } from 'react-router-dom'
-import Blocklist from 'components/Blocklist'
 import { NetworkContextName } from 'constants/misc'
 import { LanguageProvider } from 'i18n'
 import App from 'pages/App'
@@ -74,14 +73,12 @@ ReactDOM.render(
         <LanguageProvider>
           <Web3ReactProvider getLibrary={getLibrary}>
             <Web3ProviderNetwork getLibrary={getLibrary}>
-              <Blocklist>
-                <Updaters />
-                <ThemeProvider>
-                  <ThemedGlobalStyle />
-                  <AppziButton />
-                  <App />
-                </ThemeProvider>
-              </Blocklist>
+              <Updaters />
+              <ThemeProvider>
+                <ThemedGlobalStyle />
+                <AppziButton />
+                <App />
+              </ThemeProvider>
             </Web3ProviderNetwork>
           </Web3ReactProvider>
         </LanguageProvider>
