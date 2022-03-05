@@ -13,7 +13,6 @@ import { MouseoverTooltip, MouseoverTooltipContent } from 'components/Tooltip'
 import JSBI from 'jsbi'
 import { useCallback, useContext, useEffect, useMemo, useState } from 'react'
 import { ArrowDown, CheckCircle, HelpCircle, Info } from 'react-feather'
-import ReactGA from 'react-ga'
 import { RouteComponentProps } from 'react-router-dom'
 import { Text } from 'rebass'
 import { V3TradeState } from 'state/routing/types'
@@ -231,12 +230,6 @@ export default function Swap({ history }: RouteComponentProps) {
       }
     } else {
       await approveCallback()
-
-      ReactGA.event({
-        category: 'Swap',
-        action: 'Approve',
-        label: [trade?.inputAmount.currency.symbol, toggledVersion].join('/'),
-      })
     }
   }, [approveCallback, gatherPermitSignature, signatureState, toggledVersion, trade?.inputAmount.currency.symbol])
 
@@ -272,21 +265,6 @@ export default function Swap({ history }: RouteComponentProps) {
     swapCallback()
       .then((hash) => {
         setSwapState({ attemptingTxn: false, tradeToConfirm, showConfirm, swapErrorMessage: undefined, txHash: hash })
-        ReactGA.event({
-          category: 'Swap',
-          action:
-            recipient === null
-              ? 'Swap w/o Send'
-              : (recipientAddress ?? recipient) === account
-              ? 'Swap w/o Send + recipient'
-              : 'Swap w/ Send',
-          label: [
-            trade?.inputAmount?.currency?.symbol,
-            trade?.outputAmount?.currency?.symbol,
-            getTradeVersion(trade),
-            'MH',
-          ].join('/'),
-        })
       })
       .catch((error) => {
         setSwapState({
@@ -297,7 +275,7 @@ export default function Swap({ history }: RouteComponentProps) {
           txHash: undefined,
         })
       })
-  }, [swapCallback, priceImpact, tradeToConfirm, showConfirm, recipient, recipientAddress, account, trade])
+  }, [swapCallback, priceImpact, tradeToConfirm, showConfirm])
 
   // errors
   const [showInverted, setShowInverted] = useState<boolean>(false)
@@ -454,12 +432,6 @@ export default function Swap({ history }: RouteComponentProps) {
                       </ResponsiveTooltipContainer>
                     }
                     placement="bottom"
-                    onOpen={() =>
-                      ReactGA.event({
-                        category: 'Swap',
-                        action: 'Router Tooltip Open',
-                      })
-                    }
                   >
                     <AutoRow gap="4px" width="auto">
                       <AutoRouterLogo />
@@ -486,12 +458,6 @@ export default function Swap({ history }: RouteComponentProps) {
                       </ResponsiveTooltipContainer>
                     }
                     placement="bottom"
-                    onOpen={() =>
-                      ReactGA.event({
-                        category: 'Swap',
-                        action: 'Transaction Details Tooltip Open',
-                      })
-                    }
                   >
                     <StyledInfo />
                   </MouseoverTooltipContent>
