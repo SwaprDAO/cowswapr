@@ -20,7 +20,6 @@ import {
   SerializedPair,
   SerializedToken,
   updateArbitrumAlphaAcknowledged,
-  updateHideClosedPositions,
   updateRecipientToggleVisible,
   updateOptimismAlphaAcknowledged,
   updateUserClientSideRouter,
@@ -187,21 +186,6 @@ export function useUserSlippageTolerance(): Percent | 'auto' {
     () => (userSlippageTolerance === 'auto' ? 'auto' : new Percent(userSlippageTolerance, 10_000)),
     [userSlippageTolerance]
   )
-}
-
-export function useUserHideClosedPositions(): [boolean, (newHideClosedPositions: boolean) => void] {
-  const dispatch = useAppDispatch()
-
-  const hideClosedPositions = useAppSelector((state) => state.user.userHideClosedPositions)
-
-  const setHideClosedPositions = useCallback(
-    (newHideClosedPositions: boolean) => {
-      dispatch(updateHideClosedPositions({ userHideClosedPositions: newHideClosedPositions }))
-    },
-    [dispatch]
-  )
-
-  return [hideClosedPositions, setHideClosedPositions]
 }
 
 /**

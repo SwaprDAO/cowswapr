@@ -3,17 +3,13 @@ import { Route, Switch } from 'react-router-dom'
 import styled from 'styled-components/macro'
 import AddressClaimModal from '../components/claim/AddressClaimModal'
 import ErrorBoundary from '../components/ErrorBoundary'
-import Header from '../components/Header'
+import { Header } from '../components/Header'
 import Polling from '../components/Header/Polling'
 import Popups from 'components/Popups'
 import Web3ReactManager from '../components/Web3ReactManager'
 import { useModalOpen, useToggleModal } from '../state/application/hooks'
 import { ApplicationModal } from '../state/application/reducer'
 import DarkModeQueryParamReader from '../theme/DarkModeQueryParamReader'
-// import Pool from './Pool'
-// import { PositionPage } from './Pool/PositionPage'
-// import PoolV2 from './Pool/v2'
-// import PoolFinder from './PoolFinder'
 import Swap from './Swap'
 import { OpenClaimAddressModalAndRedirectToSwap, RedirectPathToSwapOnly, RedirectToSwap } from './Swap/redirects'
 
@@ -72,16 +68,9 @@ export default function App() {
             <TopLevelModals />
             <Switch>
               <Route exact strict path="/claim" component={OpenClaimAddressModalAndRedirectToSwap} />
-
               <Route exact strict path="/send" component={RedirectPathToSwapOnly} />
               <Route exact strict path="/swap/:outputCurrency" component={RedirectToSwap} />
               <Route exact strict path="/swap" component={Swap} />
-
-              {/* <Route exact strict path="/pool/v2/find" component={PoolFinder} />
-              <Route exact strict path="/pool/v2" component={PoolV2} />
-              <Route exact strict path="/pool" component={Pool} />
-              <Route exact strict path="/pool/:tokenId" component={PositionPage} /> */}
-
               <Route component={RedirectPathToSwapOnly} />
             </Switch>
             <Marginer />

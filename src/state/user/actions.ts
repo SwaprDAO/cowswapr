@@ -29,7 +29,6 @@ export const updateUserLocale = createAction<{ userLocale: SupportedLocale }>('u
 export const updateUserClientSideRouter = createAction<{ userClientSideRouter: boolean }>(
   'user/updateUserClientSideRouter'
 )
-export const updateHideClosedPositions = createAction<{ userHideClosedPositions: boolean }>('user/hideClosedPositions')
 export const updateUserSlippageTolerance = createAction<{ userSlippageTolerance: number | 'auto' }>(
   'user/updateUserSlippageTolerance'
 )
