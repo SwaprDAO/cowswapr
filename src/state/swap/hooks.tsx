@@ -17,7 +17,6 @@ import { useCurrency } from '../../hooks/Tokens'
 import useENS from '../../hooks/useENS'
 import useParsedQueryString from '../../hooks/useParsedQueryString'
 import useSwapSlippageTolerance from '../../hooks/useSwapSlippageTolerance'
-import { Version } from '../../hooks/useToggledVersion'
 import { useActiveWeb3React } from '../../hooks/web3'
 import { isAddress } from 'utils'
 import { AppState } from 'state'
@@ -25,6 +24,11 @@ import { useCurrencyBalances } from '../wallet/hooks'
 import { Field, replaceSwapState, selectCurrency, setRecipient, switchCurrencies, typeInput } from './actions'
 import { SwapState } from './reducer'
 import { truncateOnMaxDecimals } from 'utils/format'
+
+export enum Version {
+  v2 = 'V2',
+  v3 = 'V3',
+}
 
 export function useSwapState(): AppState['swap'] {
   return useAppSelector((state) => state.swap)

@@ -18,7 +18,6 @@ import {
   updateUserExpertMode,
   updateUserSlippageTolerance,
   toggleURLWarning,
-  updateHideClosedPositions,
   updateUserLocale,
   updateArbitrumAlphaAcknowledged,
   updateRecipientToggleVisible,
@@ -166,9 +165,6 @@ export default createReducer(initialState, (builder) =>
     })
     .addCase(updateUserClientSideRouter, (state, action) => {
       state.userClientSideRouter = action.payload.userClientSideRouter
-    })
-    .addCase(updateHideClosedPositions, (state, action) => {
-      state.userHideClosedPositions = action.payload.userHideClosedPositions
     })
     .addCase(addSerializedToken, (state, { payload: { serializedToken } }) => {
       if (!state.tokens) {

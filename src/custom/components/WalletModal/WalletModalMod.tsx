@@ -5,9 +5,7 @@ import { WalletConnectConnector } from '@web3-react/walletconnect-connector'
 import { AutoRow } from 'components/Row'
 // import { useWalletConnectMonitoringEventCallback } from 'hooks/useMonitoringEventCallback'
 import { useEffect, useState } from 'react'
-
 import styled from 'styled-components/macro'
-
 import MetamaskIcon from 'assets/images/metamask.png'
 import { ReactComponent as Close } from 'assets/images/x.svg'
 import { injected, portis } from 'connectors'
